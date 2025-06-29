@@ -1,0 +1,23 @@
+import requests
+
+# OneDrive sharing links need to be converted to direct download links
+def get_direct_download_url(share_url):
+    if "1drv.ms" in share_url:
+        # Convert to direct download link
+        import urllib.parse
+        base_url = "https://api.onedrive.com/v1.0/shares/u!"
+        resource = share_url.split('/')[-1].split('?')[0]
+        encoded = urllib.parse.quote_plus(resource)
+        return f"{base_url}{encoded}/root/content"
+    return share_url
+
+url = "https://1drv.ms/x/c/a9bc760a4ebd6b3a/EZnJHGEwVU9DmEVHECF5ceYBJ20LmMDVeBbCLLwlH4wM4A?e=XifgV2"
+direct_url = get_direct_download_url(url)
+
+response = requests.get(direct_url)
+if response.status_code == 200:
+    with open("downloaded_file.xlsx", "wb") as f:
+        f.write(response.content)
+    print("File downloaded successfully.")
+else:
+    print(f"Failed to download file. Status code: {response.status_code}")
