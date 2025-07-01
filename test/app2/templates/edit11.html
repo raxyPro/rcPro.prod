@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<script>
+    // Call this function when editing is done (on blur or Enter key)
+    function editingDone() {
+        const content = document.getElementById('myEditableDiv').innerText;
+        console.log("Editing done. New content:", content);
+        // You can add more logic here (e.g., send content to server)
+    }
+
+    // Listen for Enter key to finish editing
+    document.addEventListener('DOMContentLoaded', function() {
+        const editableDiv = document.getElementById('myEditableDiv');
+        editableDiv.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent new line
+                editableDiv.blur(); // Trigger blur event
+            }
+        });
+        editableDiv.addEventListener('blur', editingDone);
+    });
+</script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Text</title>
+    <style>
+        /* Style for the editable container */
+        .editable-text {
+            border: 1px solid #ccc; /* Add a border to make it look like an input field */
+            padding: 10px; /* Add some padding for spacing */
+            min-height: 20px; /* Ensure it has a minimum height */
+            cursor: pointer; /* Change cursor to a pointer to indicate it's clickable */
+            transition: all 0.3s ease; /* Add a smooth transition for hover effect */
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* Style on hover to give visual feedback */
+        .editable-text:hover {
+            border-color: #007BFF; /* Change border color on hover */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow on hover */
+        }
+
+        /* Style when the element is focused (being edited) */
+        .editable-text:focus {
+            outline: none; /* Remove the default outline */
+            border-color: #0056b3; /* Darker border color on focus */
+            box-shadow: 0 0 5px rgba(0, 86, 179, 0.7); /* Darker shadow on focus */
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Click the text below to edit it</h2>
+
+    <div
+        id="myEditableDiv"
+        class="editable-text"
+        contenteditable="true"
+        onclick="logClick()">
+        This is a text that you can edit. Just click here and start typing.
+    </div>
+
+    <script>
+        // Optional JavaScript function to log a message when the element is clicked
+        function logClick() {
+            console.log("The editable div was clicked!");
+        }
+    </script>
+
+</body>
+</html>
