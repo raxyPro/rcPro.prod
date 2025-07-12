@@ -1,10 +1,11 @@
-# Skip WordPress rules for /appstock 
-RewriteCond %{REQUEST_URI} ^/appstock /
+# Skip WordPress rules for /app
+RewriteCond %{REQUEST_URI} ^/app /
 RewriteRule ^ - [L]
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-PassengerAppRoot "/home/rcprhkdi/rcpro.in/test"
-PassengerBaseURI "/test"
-PassengerPython "/home/rcprhkdi/virtualenv/rcpro.in/test/3.6/bin/python"
+PassengerAppRoot "/home/rcprhkdi/rcpro.in/app"
+PassengerBaseURI "/app"
+PassengerPython "/home/rcprhkdi/virtualenv/rcpro.in/app/3.6/bin/python"
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
 # DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
 <IfModule Litespeed>

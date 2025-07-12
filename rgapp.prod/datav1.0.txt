@@ -1,0 +1,44 @@
+-- COLLATE=utf8mb4_unicode_ci; 
+CREATE TABLE `vemp` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) DEFAULT NULL,
+  `fullname` varchar(100) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `cvxml` text,
+  `email` varchar(100) DEFAULT NULL,
+  `pin_hash` varchar(255) DEFAULT NULL,
+  `reset_token` varchar(255) DEFAULT NULL,
+  `reset_token_expires_at` datetime DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `code` (`code`),
+  UNIQUE KEY `idx_user_cv_user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+CREATE TABLE `task` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_code` varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `due_date` date DEFAULT NULL,
+  `status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT 'Pending',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_code` (`user_code`) /*!80000 INVISIBLE */
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `profcv` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `pf_typ` varchar(255) DEFAULT NULL,
+  `pf_name` varchar(255) DEFAULT NULL,
+  `pf_data` longtext,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `status` varchar(6) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_ind_idx` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
